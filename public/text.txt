@@ -1,0 +1,54 @@
+Homepage.jsx
+--------------
+Selamat datang di Website Pribadi Saya! Saya adalah mahasiswa semester 6 Statistika di Universitas Terbuka. Sebelum mendalami dunia data, saya memiliki pengalaman profesional sebagai Guru dan Frontliner Bank. Pengalaman tersebut mengajarkan saya pentingnya ketelitian dan cara menyampaikan informasi yang kompleks dengan sederhana. Website ini saya dedikasikan sebagai ruang berbagi, mulai dari teknis Excel, R, dan Python, hingga pembahasan soal-soal matematika sekolah. Mari belajar dan bertumbuh bersama!
+
+https://forms.gle/AqS7soDpiwptLxKz6
+
+Tentangpage.jsx
+----------------
+Saya memiliki pengalaman kerja selama 3 tahun sebagai Teller di PT Bank Central Asia Tbk. Di sana, saya 
+terbiasa melayani nasabah, mengelola transaksi keuangan dengan sangat teliti, dan bekerja cepat di bawah 
+tekanan. 
+Selain itu, saya juga pernah mengajar selama hampir 2 tahun di Yayasan Putra Asih Malida. Pengalaman ini 
+sangat melatih kemampuan saya dalam berkomunikasi dan menjelaskan sesuatu dengan cara yang mudah 
+dimengerti oleh berbagai macam orang. 
+Saat ini, untuk terus mengembangkan diri, saya mengambil kuliah S1 jurusan Statistika di Universitas 
+Terbuka. Kuliah ini membantu saya untuk berpikir lebih terstruktur dan memberikan saya keahlian dalam 
+mengolah data untuk membantu memecahkan masalah. Dengan bekal pengalaman di bidang pelayanan dan kemampuan analisis yang saya miliki, saya bersemangat untuk bisa berkontribusi di lingkungan kerja yang baru.
+
+### Pengalaman di BCA
+• Memproses berbagai transaksi keuangan nasabah, termasuk transaksi valuta asing (valas) dan 
+domestik, dengan akurasi dan efisiensi tinggi. 
+• Memberikan layanan pelanggan yang prima, berfokus pada kepuasan pelanggan, serta menangani 
+pertanyaan dan keluhan dengan solusi yang efektif. 
+• Mengelola kas dengan cermat, termasuk penerimaan, penghitungan, dan penyetoran, serta 
+melakukan rekonsiliasi harian dengan akurasi tinggi. 
+• Terbiasa menangani data sensitif yang membutuhkan presisi dan akurasi tinggi. 
+• Memberikan informasi kepada nasabah tentang produk dan layanan keuangan yang tersedia.
+
+### Pengalaman di Malidar
+• Mengembangkan dan menyampaikan materi ajar yang menarik dan mudah dipahami siswa. 
+• Melakukan evaluasi pembelajaran siswa dan menganalisis data evaluasi untuk meningkatkan 
+metode pengajaran. 
+• Berkomunikasi secara efektif dengan siswa, orang tua, dan rekan kerja. 
+• Mengelola administrasi kelas dan data perkembangan siswa. 
+• Mengasah kemampuan menganalisis data perkembangan siswa dan menyampaikan informasi yang kompleks.
+----------------
+
+Seperti yang kita ketahui era digital bergerak sangat cepat, kebutuhan akan inovasi dan adaptasi menjadi semakin penting. Banyak individu dan perusahaan kesulitan mengikuti laju perubahan teknologi yang konstan, sehingga berisiko tertinggal. Seminar ini hadir sebagai jawaban atas tantangan tersebut. Kami melihat adanya kesenjangan antara potensi teknologi dan pemanfaatannya di berbagai sektor. Oleh karena itu, kami berinisiatif menciptakan sebuah wadah di mana pengetahuan, pengalaman, dan ide-ide inovatif dapat dibagikan secara terbuka dan interaktif.
+
+<span className="font-bold">Menginspirasi dan Mendidik:</span> Memberikan wawasan terbaru tentang tren teknologi yang sedang berkembang, serta menginspirasi peserta untuk berpikir kreatif dan berani mengambil langkah inovatif.
+
+<span className="font-bold">Membangun Jaringan:</span> Menciptakan ruang bagi para profesional, pengembang, dan visioner untuk berinteraksi, berkolaborasi, dan membangun hubungan yang saling menguntungkan.
+
+<span className="font-bold">Mendorong Penerapan Praktis:</span> Tidak hanya berfokus pada teori, seminar ini bertujuan untuk memberikan contoh dan studi kasus nyata yang dapat diterapkan langsung dalam pekerjaan atau proyek peserta.
+
+Menjadi katalisator utama yang mendorong inovasi dan transformasi digital di Indonesia, menciptakan komunitas yang terus belajar dan berkolaborasi untuk membentuk masa depan yang lebih baik.
+
+<li className="text-base/loose">Menyelenggarakan seminar dan workshop berkualitas tinggi yang relevan dengan kebutuhan industri.</li>
+
+<li className="text-base/loose">Menghadirkan pembicara dan ahli yang kompeten dan berpengalaman di bidangnya</li>
+
+<li className="text-base/loose">Membangun platform berkelanjutan untuk pertukaran pengetahuan dan kolaborasi.</li>
+
+<li className="text-base/loose">Memberdayakan individu dan organisasi agar mampu beradaptasi dan berinovasi di tengah perubahan.</li>

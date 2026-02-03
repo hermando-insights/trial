@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@layer base{
+    h1, 
+    h2, 
+    h3, 
+    h4, 
+    h5, 
+    h6, 
+    p{
+        color:oklch(14.7% 0.004 49.25);
+    }
+}
+
+.swiper-wrapper{
+    margin-bottom: 50px;
+}
