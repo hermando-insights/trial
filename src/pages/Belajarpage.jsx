@@ -57,15 +57,21 @@ const Belajarpage = () => {
             <div 
               key={index}
               onClick={() => navigate(cat.path)} 
-              // PERBAIKAN DISINI: Tidak ada lagi logika activeCategory, murni style biasa
-              className="p-6 rounded-2xl border transition-all duration-300 cursor-pointer group flex items-center gap-4 bg-white border-transparent hover:border-[#38b5ff] hover:translate-y-[-5px]"
+              // PERBAIKAN:
+              // active:scale-95 -> Efek tekan (mendelep) di HP
+              // active:border-[#38b5ff] -> Border biru pas ditekan
+              // active:bg-stone-50 -> Background agak gelap dikit pas ditekan
+              className="p-6 rounded-2xl border transition-all duration-200 cursor-pointer group flex items-center gap-4 bg-white border-transparent 
+              hover:border-[#38b5ff] hover:translate-y-[-5px] hover:shadow-lg
+              active:scale-95 active:border-[#38b5ff] active:bg-stone-50"
             >
-              <div className={`w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center text-3xl ${cat.color} group-hover:scale-110 transition-transform`}>
+              <div className={`w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center text-3xl ${cat.color} group-hover:scale-110 group-active:scale-110 transition-transform`}>
                 <i className={cat.icon}></i>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-stone-900 group-hover:text-[#38b5ff] transition-colors">
+                {/* group-active:text-[#38b5ff] -> Teks jadi biru pas container ditekan */}
+                <h3 className="text-xl font-bold text-stone-900 group-hover:text-[#38b5ff] group-active:text-[#38b5ff] transition-colors">
                   {cat.name}
                 </h3>
                 <p className="text-sm text-stone-500">
@@ -74,7 +80,12 @@ const Belajarpage = () => {
               </div>
 
               <div className="ml-auto">
-                <i className="ri-arrow-right-line text-2xl text-stone-300 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all"></i>
+                {/* group-active:opacity-100 -> Panah muncul pas ditekan */}
+                {/* group-active:translate-x-0 -> Panah geser pas ditekan */}
+                <i className="ri-arrow-right-line text-2xl text-stone-300 opacity-0 -translate-x-4 
+                group-hover:opacity-100 group-hover:translate-x-0 
+                group-active:opacity-100 group-active:translate-x-0 
+                transition-all"></i>
               </div>
             </div>
           ))}

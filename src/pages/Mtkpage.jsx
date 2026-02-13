@@ -17,7 +17,8 @@ const Mtkpage = () => {
       <div className="text-center relative z-10 max-w-2xl" data-aos="zoom-in" data-aos-duration="1000">
         
         {/* Ikon Animasi */}
-        <div className="mb-8 relative inline-block">
+        {/* Tambahan: active:scale-90 biar ikonnya mengecil pas disentuh */}
+        <div className="mb-8 relative inline-block transition-transform duration-300 active:scale-90 cursor-pointer">
             {/* Lingkaran Luar Berputar */}
             <div className="w-32 h-32 border-4 border-dashed border-stone-800 rounded-full animate-spin-slow flex items-center justify-center absolute top-0 left-0"></div>
             
@@ -41,11 +42,19 @@ const Mtkpage = () => {
         {/* Tombol Balik */}
         <div className="flex justify-center gap-4">
             <Link 
-                to="/ayo-belajar" 
-                className="group flex items-center gap-2 bg-[#38b5ff] text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-blue-500/20 hover:bg-blue-600 hover:scale-105 transition-all duration-300"
+              to="/ayo-belajar" 
+              // PERBAIKAN RESPONSIF HP:
+              // active:scale-95 -> Efek tombol ditekan (mengecil)
+              // active:bg-blue-700 -> Warna jadi lebih gelap pas ditekan
+              // active:shadow-none -> Bayangan hilang pas ditekan (efek realistis)
+              className="group flex items-center gap-2 bg-[#38b5ff] text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-blue-500/20 
+              hover:bg-blue-600 hover:scale-105 
+              active:scale-95 active:bg-blue-700 active:shadow-none
+              transition-all duration-300"
             >
-                <i className="ri-arrow-left-line group-hover:-translate-x-1 transition-transform"></i> 
-                Cari Materi Lain
+              {/* group-active:-translate-x-2 -> Panah gerak lebih jauh pas tombol ditekan */}
+              <i className="ri-arrow-left-line group-hover:-translate-x-1 group-active:-translate-x-2 transition-transform"></i> 
+              Cari Materi Lain
             </Link>
         </div>
 

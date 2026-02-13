@@ -6,16 +6,13 @@ import App from './App.jsx'
 import 'remixicon/fonts/remixicon.css'
 
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
-// ..
+import 'aos/dist/aos.css'; 
+
 AOS.init();
 
-import { BrowserRouter } from 'react-router-dom'
-
+// BrowserRouter DIHAPUS dari sini supaya tidak bentrok
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
     <App />
-    </BrowserRouter>
   </StrictMode>,
 );

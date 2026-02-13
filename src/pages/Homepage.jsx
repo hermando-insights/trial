@@ -1,13 +1,19 @@
 import Typewriter from 'typewriter-effect';
 import { Image, SekilasSaya } from '../data';
+import { useState } from 'react';
 
 const Homepage = () => {
+  // State untuk melacak kartu mana yang aktif (biru)
+  const [activeCard, setActiveCard] = useState(null);
+
   return (
     <div className="homepage pt-23">
       <div className="container mx-auto px-4">
+        
         {/* Hero Section */}
         <div className="hero grid md:grid-cols-2 items-center grid-cols-1 lg:pt-0 pt-16 pb-5">
           <div className="text-center md:text-left lg:pb-0 pb-16">
+            
             {/* Quote Badge */}
             <div className="bg-stone-900 w-fit p-2 rounded flex items-center gap-2 mx-auto md:mx-0 mb-6 shadow-lg">
               <img src={Image.SalibBiru} alt="SalibBiru" className="lg:w-8 w-6" />
@@ -29,18 +35,15 @@ const Homepage = () => {
               </span>
             </h1>
 
-
             <div className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
-              {/* Kalo ganti link CV, di hrefnya aja */}
               <a
                 href="https://drive.google.com/file/d/1RPwMJ17phrDOFj_Tdj6sCHiuAjiHzR7t/view?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
-                className="bg-stone-950 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-[#38b5ff] transition-all duration-300 shadow-md flex items-center gap-2"
+                className="bg-stone-950 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-[#38b5ff] active:bg-[#38b5ff] active:scale-95 transition-all duration-300 shadow-md flex items-center gap-2 select-none"
               >
                 Lihat Profil Saya <i className="ri-download-2-line"></i>
               </a>
-
             </div>
           </div>
 
@@ -56,7 +59,6 @@ const Homepage = () => {
       </div>
 
       {/* Sekilas Tentang Website */}
-      {/* Tentang */}
       <div className="tentang bg-stone-950 py-28" id="about-me">
         <div className="container mx-auto px-4">
           <h1 className="text-center text-white md:text-5xl/tight text-4xl/tight mb-8 font-semibold" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
@@ -74,13 +76,48 @@ const Homepage = () => {
           </div>
 
           <div className="mt-16 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
-            {SekilasSaya.map(acara => (
-              <div key={acara.id} className="text-center bg-stone-900 p-8 rounded-2xl border border-white/5 hover:border-[#38b5ff]/50 hover:bg-[#38b5ff] transition-all duration-500 group" data-aos="fade-up" data-aos-duration="1000" data-aos-delay={acara.delay} data-aos-once="true">
-                <i className={` ${acara.icon} group-hover:text-white ri-3x text-[#38b5ff] transition-colors`}></i>
-                <h1 className="group-hover:text-white text-2xl font-bold my-4 uppercase tracking-wider">{acara.Judul}</h1>
-                <p className="group-hover:text-white text-white/60 text-base leading-relaxed">{acara.text}</p>
-              </div>
-            ))}
+            {SekilasSaya.map((acara) => {
+              const isActive = activeCard === acara.id;
+
+              return (
+                // 1. WRAPPER LUAR (KHUSUS ANIMASI AOS)
+                // Kita taruh AOS disini supaya dia tidak terganggu saat state di dalamnya berubah
+                <div 
+                  key={acara.id}
+                  data-aos="fade-up" 
+                  data-aos-duration="1000" 
+                  data-aos-delay={acara.delay} 
+                  data-aos-once="true"
+                >
+                  {/* 2. WRAPPER DALAM (KHUSUS KLIK & WARNA) */}
+                  <div 
+                    onClick={() => setActiveCard(acara.id)}
+                    className={`text-center p-8 rounded-2xl border transition-all duration-300 cursor-pointer select-none group h-full
+                      ${isActive 
+                        ? "bg-[#38b5ff] border-[#38b5ff] scale-105 shadow-xl" 
+                        : "bg-stone-900 border-white/5 hover:border-[#38b5ff]/50 hover:bg-[#38b5ff]"
+                      }`} 
+                  >
+                    {/* Ikon */}
+                    <i className={`${acara.icon} ri-3x transition-colors duration-300
+                      ${isActive ? "text-white" : "text-[#38b5ff] group-hover:text-white"}`}>
+                    </i>
+                    
+                    {/* Judul */}
+                    <h1 className={`text-2xl font-bold my-4 uppercase tracking-wider transition-colors duration-300
+                      ${isActive ? "text-white" : "text-white group-hover:text-white"}`}>
+                      {acara.Judul}
+                    </h1>
+                    
+                    {/* Deskripsi */}
+                    <p className={`text-base leading-relaxed transition-colors duration-300
+                      ${isActive ? "text-white" : "text-white/60 group-hover:text-white"}`}>
+                      {acara.text}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
         </div>
