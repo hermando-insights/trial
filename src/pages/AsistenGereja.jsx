@@ -28,7 +28,7 @@ const AsistenGereja = () => {
   // Fungsi kirim data ke Backend Flask
   const generatePPT = async () => {
     try {
-      const response = await fetch('https://asisten-gereja-anda.onrender.com/generate-ppt', {
+      const response = await fetch('https://asisten-gereja.onrender.com/generate-ppt', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ slides: slides }),
