@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
 const AsistenGereja = () => {
-  const [slides, setSlides] = useState([{ layout_idx: 0, judul: '', isi: '' }]);
+  // Ditambahkan field 'section' ke state awal
+  const [slides, setSlides] = useState([{ layout_idx: 0, judul: '', isi: '', section: '' }]);
+  const [loading, setLoading] = useState(false);
 
-  // Fungsi untuk update data di tiap slide
   const handleInputChange = (index, field, value) => {
     const newSlides = [...slides];
     newSlides[index][field] = value;
     setSlides(newSlides);
   };
 
-  // Fungsi tambah slide baru
   const tambahSlide = () => {
-    setSlides([...slides, { layout_idx: 0, judul: '', isi: '' }]);
+    // Tambah slide baru dengan field section kosong
+    setSlides([...slides, { layout_idx: 0, judul: '', isi: '', section: '' }]);
   };
 
-  // Fungsi hapus slide tertentu
   const hapusSlide = (index) => {
     if (slides.length > 1) {
       const newSlides = slides.filter((_, i) => i !== index);
@@ -25,8 +25,8 @@ const AsistenGereja = () => {
     }
   };
 
-  // Fungsi kirim data ke Backend Flask
   const generatePPT = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://asisten-gereja.onrender.com/generate-ppt', {
         method: 'POST',
@@ -39,24 +39,26 @@ const AsistenGereja = () => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = "Ibadah_Minggu.pptx";
+        a.download = "PPT_Ibadah_Gereja.pptx";
         document.body.appendChild(a);
         a.click();
         a.remove();
         alert("Selesai! PPT berhasil dibuat.");
       } else {
-        alert("Gagal membuat PPT. Cek terminal Python.");
+        alert("Gagal membuat PPT. Cek koneksi server Render kamu.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Koneksi gagal! Pastikan App.py sudah dijalankan.");
+      alert("Koneksi gagal! Server Render mungkin sedang tidur, tunggu 1 menit lalu coba lagi.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', color: '#333', fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: '#007bff', textAlign: 'center' }}>Asisten PPT Ibadah</h1>
-      <p style={{ textAlign: 'center', color: '#666' }}>Otomatisasi pembuatan slide untuk pelayanan minggu.</p>
+    <div style={{ padding: '60px 20px', maxWidth: '800px', margin: '0 auto', color: '#333', fontFamily: 'sans-serif' }}>
+      <h1 style={{ color: '#007bff', textAlign: 'center' }}>Asisten PPT Ibadah Gereja</h1>
+      <p style={{ textAlign: 'center', color: '#888' }}>Kelompokkan slide kamu menggunakan fitur Section.</p>
       <hr style={{ margin: '30px 0' }} />
       
       {slides.map((slide, index) => (
@@ -69,7 +71,6 @@ const AsistenGereja = () => {
           position: 'relative',
           boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
         }}>
-          {/* Tombol Hapus Slide di pojok kanan atas kartu */}
           <button 
             onClick={() => hapusSlide(index)}
             style={{
@@ -88,6 +89,26 @@ const AsistenGereja = () => {
           </button>
 
           <h3 style={{ marginTop: 0 }}>Slide #{index + 1}</h3>
+
+          {/* INPUT BARU: Section Name */}
+          <div style={{ marginBottom: '15px' }}>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#28a745' }}>Nama Section (Opsional):</label>
+            <input 
+              type="text"
+              placeholder="Contoh: Puji-pujian, Firman Tuhan, atau Warta" 
+              value={slide.section}
+              onChange={(e) => handleInputChange(index, 'section', e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '10px', 
+                boxSizing: 'border-box', 
+                borderRadius: '8px', 
+                border: '1px solid #28a745',
+                backgroundColor: '#f0fff4'
+              }}
+            />
+            <small style={{ color: '#666' }}>Semua slide di bawahnya akan masuk ke section ini sampai kamu buat section baru.</small>
+          </div>
           
           <div style={{ marginBottom: '15px' }}>
             <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Pilih Layout:</label>
@@ -101,7 +122,7 @@ const AsistenGereja = () => {
               <option value="2">Umat Berdiri</option>
               <option value="3">Judul</option>
               <option value="4">Judul Bacaan Alkitab</option>
-              <option value="5">Isi Ayat Alkitab</option>
+              <option value="5">Isi Ayat Alkitab atau Teks Apapun</option>
               <option value="6">Bacaan Penatua</option>
               <option value="7">Bacaan PF</option>
               <option value="8">Bacaan Liturgos</option>
@@ -114,23 +135,38 @@ const AsistenGereja = () => {
           </div>
 
           <div style={{ marginBottom: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Judul Slide:</label>
-            <input 
-              type="text" 
-              placeholder="Contoh: Nyanyian Pembukaan" 
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Input Teks:</label>
+            <textarea 
+              placeholder="Contoh: Warta Jemaat atau Panggilan Beribadah" 
               value={slide.judul}
               onChange={(e) => handleInputChange(index, 'judul', e.target.value)}
-              style={{ width: '100%', padding: '12px', boxSizing: 'border-box', borderRadius: '8px', border: '1px solid #ced4da' }}
+              style={{ 
+                width: '100%', 
+                height: '120px', 
+                padding: '12px', 
+                boxSizing: 'border-box', 
+                borderRadius: '8px', 
+                border: '1px solid #ced4da',
+                resize: 'vertical'
+              }}
             />
           </div>
           
           <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Isi / Lirik:</label>
+            <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Lirik Lagu:</label>
             <textarea 
-              placeholder="Masukkan lirik atau ayat... (Gunakan Enter untuk baris baru)" 
+              placeholder="Masukkan lirik lagu (Gunakan Enter untuk baris baru)" 
               value={slide.isi}
               onChange={(e) => handleInputChange(index, 'isi', e.target.value)}
-              style={{ width: '100%', height: '120px', padding: '12px', boxSizing: 'border-box', borderRadius: '8px', border: '1px solid #ced4da', resize: 'vertical' }}
+              style={{ 
+                width: '100%', 
+                height: '120px', 
+                padding: '12px', 
+                boxSizing: 'border-box', 
+                borderRadius: '8px', 
+                border: '1px solid #ced4da', 
+                resize: 'vertical' 
+              }}
             />
           </div>
         </div>
@@ -139,31 +175,34 @@ const AsistenGereja = () => {
       <div style={{ marginTop: '30px', display: 'flex', gap: '15px', justifyContent: 'center' }}>
         <button 
           onClick={tambahSlide} 
+          disabled={loading}
           style={{ 
             padding: '12px 25px', 
-            cursor: 'pointer', 
+            cursor: loading ? 'not-allowed' : 'pointer', 
             borderRadius: '8px', 
             border: '1px solid #6c757d',
             background: 'white',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            opacity: loading ? 0.6 : 1
           }}
         >
           + Tambah Slide Baru
         </button>
         <button 
           onClick={generatePPT} 
+          disabled={loading}
           style={{ 
             padding: '12px 25px', 
-            background: '#007bff', 
+            background: loading ? '#6c757d' : '#007bff', 
             color: 'white', 
             border: 'none', 
             borderRadius: '8px', 
-            cursor: 'pointer',
+            cursor: loading ? 'not-allowed' : 'pointer',
             fontWeight: 'bold',
             boxShadow: '0 4px 6px rgba(0,123,255,0.2)'
           }}
         >
-          Generate PowerPoint (.pptx)
+          {loading ? 'Sedang Memproses...' : 'Generate PowerPoint (.pptx)'}
         </button>
       </div>
       
